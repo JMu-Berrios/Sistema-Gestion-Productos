@@ -1,0 +1,38 @@
+import { IsEmail, IsNotEmpty, MinLength, MaxLength, Matches, IsOptional, IsString } from 'class-validator';
+
+export class CrearUsuarioDto {
+  @IsNotEmpty({ message: 'El nombre es requerido' })
+  @MaxLength(100, { message: 'El nombre no puede exceder 100 caracteres' })
+  nombre: string;
+
+  @IsNotEmpty({ message: 'El apellido es requerido' })
+  @MaxLength(100, { message: 'El apellido no puede exceder 100 caracteres' })
+  apellido: string;
+
+  @IsEmail({}, { message: 'El email debe ser válido' })
+  @IsNotEmpty({ message: 'El email es requerido' })
+  email: string;
+
+  @IsNotEmpty({ message: 'La contraseña es requerida' })
+  @MinLength(8, { message: 'La contraseña debe tener al menos 8 caracteres' })
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, {
+    message: 'La contraseña debe contener mayúscula, minúscula y número',
+  })
+  password: string;
+
+  @IsNotEmpty({ message: 'La confirmación de contraseña es requerida' })
+  confirmPassword: string;
+
+  @IsOptional()
+  @MaxLength(20, { message: 'El teléfono no puede exceder 20 caracteres' })
+  telefono?: string;
+
+  @IsOptional()
+  @MaxLength(255, { message: 'La dirección no puede exceder 255 caracteres' })
+  direccion?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(50, { message: 'El rol no puede exceder 50 caracteres' })
+  rol?: string;
+}

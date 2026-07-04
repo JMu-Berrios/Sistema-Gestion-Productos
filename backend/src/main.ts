@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
-import * as cors from 'cors';
+import cors from 'cors';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,13 +21,13 @@ async function bootstrap() {
   }));
   
   // Configurar prefijo global de API
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api-tienda');
   
   const port = process.env.PORT || 3000;
   await app.listen(port);
-  console.log(`Aplicación ejecutándose en: http://localhost:${port}`);
+  console.log(`Aplicación ejecutándose en mi servidor: http://localhost:${port}`);
 }
 bootstrap().catch((err) => {
-  console.error('Error al iniciar la aplicación:', err);
+  console.error('Error al iniciar la aplicación de mi servidor:', err);
   process.exit(1);
 });

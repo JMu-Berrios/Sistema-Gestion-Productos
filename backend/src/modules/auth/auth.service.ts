@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, ConflictException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
@@ -27,19 +27,23 @@ export class AuthService {
 
     // Verificar que las contraseñas coincidan
     if (registerDto.password !== registerDto.confirmPassword) {
-      throw new ConflictException('Las contraseñas no coinciden');
+      throw new BadRequestException('Las contraseñas no coinciden');
     }
 
     // Encriptar contraseña con SHA-256 a través de bcrypt
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(registerDto.password, salt);
 
-    // Crear usuario
+    // Crear usuario con todos los campos
     const nuevoUsuario = this.usuarioRepository.create({
       nombre: registerDto.nombre,
       apellido: registerDto.apellido,
       email: registerDto.email,
       password: passwordHash,
+      telefono: registerDto.telefono || null,
+      direccion: registerDto.direccion || null,
+      rol: 'usuario', // Rol por defecto
+      activo: true,
     });
 
     await this.usuarioRepository.save(nuevoUsuario);
@@ -48,6 +52,7 @@ export class AuthService {
     const token = this.jwtService.sign({
       id: nuevoUsuario.id,
       email: nuevoUsuario.email,
+      rol: nuevoUsuario.rol,
     });
 
     return {
@@ -57,18 +62,28 @@ export class AuthService {
         nombre: nuevoUsuario.nombre,
         apellido: nuevoUsuario.apellido,
         email: nuevoUsuario.email,
+        telefono: nuevoUsuario.telefono,
+        direccion: nuevoUsuario.direccion,
+        rol: nuevoUsuario.rol,
       },
     };
   }
 
   async login(loginDto: LoginDto): Promise<{ token: string; usuario: any }> {
-    // Buscar usuario
-    const usuario = await this.usuarioRepository.findOne({
-      where: { email: loginDto.email },
-    });
+    // Buscar usuario incluyendo la contraseña
+    const usuario = await this.usuarioRepository
+      .createQueryBuilder('usuario')
+      .addSelect('usuario.password')
+      .where('usuario.email = :email', { email: loginDto.email })
+      .getOne();
 
     if (!usuario) {
       throw new UnauthorizedException('Credenciales inválidas');
+    }
+
+    // Verificar si el usuario está activo
+    if (!usuario.activo) {
+      throw new UnauthorizedException('Usuario desactivado');
     }
 
     // Verificar contraseña
@@ -77,10 +92,15 @@ export class AuthService {
       throw new UnauthorizedException('Credenciales inválidas');
     }
 
+    // Actualizar último acceso
+    usuario.ultimoAcceso = new Date();
+    await this.usuarioRepository.save(usuario);
+
     // Generar token
     const token = this.jwtService.sign({
       id: usuario.id,
       email: usuario.email,
+      rol: usuario.rol,
     });
 
     return {
@@ -90,11 +110,26 @@ export class AuthService {
         nombre: usuario.nombre,
         apellido: usuario.apellido,
         email: usuario.email,
+        telefono: usuario.telefono,
+        direccion: usuario.direccion,
+        rol: usuario.rol,
       },
     };
   }
 
   async validarUsuario(id: number): Promise<Usuario> {
-    return this.usuarioRepository.findOne({ where: { id } });
+    return this.usuarioRepository.findOne({ where: { id, activo: true } });
+  }
+
+  async validarUsuarioPorEmail(email: string): Promise<Usuario> {
+    return this.usuarioRepository.findOne({ where: { email, activo: true } });
+  }
+
+  async obtenerUsuarioConPassword(id: number): Promise<Usuario> {
+    return this.usuarioRepository
+      .createQueryBuilder('usuario')
+      .addSelect('usuario.password')
+      .where('usuario.id = :id', { id })
+      .getOne();
   }
 }

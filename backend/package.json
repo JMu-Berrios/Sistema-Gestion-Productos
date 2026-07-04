@@ -1,9 +1,15 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Sistema de gestión de inventario y ventas",
+  "main": "dist/main.js",
   "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "npm run build && node dist/main.js",
+    "start:dev": "npx ts-node-dev --respawn --transpile-only src/main.ts",
+    "migration:build": "npm run build",
+    "migration:run": "npm run migration:build && npx typeorm migration:run -d data-source.js",
+    "migration:revert": "npm run migration:build && npx typeorm migration:revert -d data-source.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -38,6 +44,7 @@
     "@typescript-eslint/parser": "^8.62.1",
     "eslint": "^10.6.0",
     "prettier": "^3.9.4",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^6.0.3"
   }
 }

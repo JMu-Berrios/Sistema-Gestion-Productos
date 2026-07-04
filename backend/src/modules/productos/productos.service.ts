@@ -29,14 +29,14 @@ export class ProductosService {
 
   async listarTodos(): Promise<Producto[]> {
     return this.productoRepository.find({
-      relations: ['categoria'],
+      relations: { categoria: true },
       where: { activo: true },
     });
   }
 
   async buscarPorId(id: number): Promise<Producto> {
     const producto = await this.productoRepository.findOne({
-      relations: ['categoria'],
+      relations: { categoria: true },
       where: { id },
     });
 
