@@ -1,0 +1,17 @@
+# dependencies
+/node_modules
+node_modules/
+
+# environment variables
+.env
+.env.example
+
+# logs
+logs
+*.log
+
+# optional npm cache directory
+.npm
+
+# optional eslint cache
+.eslintcache
