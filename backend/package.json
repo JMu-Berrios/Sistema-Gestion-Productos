@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "npm run build && node dist/main.js",
+    "start:prod": "npm run build && node dist/main.js",
     "start:dev": "npx ts-node-dev --respawn --transpile-only src/main.ts",
     "migration:build": "npm run build",
     "migration:run": "npm run migration:build && npx typeorm migration:run -d data-source.js",
