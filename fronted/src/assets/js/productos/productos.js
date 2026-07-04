@@ -1,3 +1,38 @@
+/**
+ * Cargar categorías en el selector del formulario
+ */
+async function cargarCategoriasEnSelector(selectorId) {
+    const select = document.getElementById(selectorId);
+    if (!select) return;
+    
+    try {
+        let categorias;
+        if (navigator.onLine) {
+            categorias = await apiService.get('/categorias');
+        } else {
+            categorias = await syncService.obtenerCategoriasOffline();
+        }
+        
+        select.innerHTML = '<option value="">Seleccionar categoría</option>';
+        if (categorias && categorias.length > 0) {
+            categorias.forEach(categoria => {
+                const option = document.createElement('option');
+                option.value = categoria.id;
+                option.textContent = categoria.nombre;
+                select.appendChild(option);
+            });
+        }
+    } catch (error) {
+        console.error('Error cargando categorías:', error);
+    }
+}
+
+// Ejecutar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    // Cargar categorías en los selectores
+    cargarCategoriasEnSelector('categoriaId');
+});
+
 class ProductosManager {
     constructor() {
         this.productos = [];

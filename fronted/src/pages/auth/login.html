@@ -1,0 +1,31 @@
+<div class="login-page">
+    <div class="login-container">
+        <div class="logo">
+            <img src="/src/assets/images/logo.svg" alt="Logo" width="80">
+            <h2>Sistema de Gestión</h2>
+        </div>
+        
+        <div id="alertContainer"></div>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" placeholder="admin@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" class="form-control" placeholder="********" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        </form>
+        
+        <div class="register-link">
+            ¿No tienes cuenta? <a href="#" onclick="app.navigateTo('register')">Regístrate aquí</a>
+        </div>
+        
+        <div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+        <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+    </div>
+</div>

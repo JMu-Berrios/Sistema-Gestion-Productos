@@ -19,7 +19,7 @@ async function bootstrap() {
         forbidNonWhitelisted: true,
         transform: true,
     }));
-    app.setGlobalPrefix('api');
+    app.setGlobalPrefix('api-tienda');
     const port = process.env.PORT || 3000;
     await app.listen(port);
     console.log(`Aplicación ejecutándose en mi servidor: http://localhost:${port}`);

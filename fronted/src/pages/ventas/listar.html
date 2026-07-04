@@ -1,0 +1,29 @@
+<div class="page-header">
+    <h1>🛒 Ventas</h1>
+    <button class="btn btn-primary" onclick="app.navigateTo('ventas/crear')">
+        + Nueva Venta
+    </button>
+</div>
+
+<div id="alertContainer"></div>
+
+<div class="card">
+    <div class="card-title">Lista de Ventas</div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Factura</th>
+                    <th>Fecha</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                    <th>Productos</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tablaVentasBody">
+                <!-- Cargado dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+</div>

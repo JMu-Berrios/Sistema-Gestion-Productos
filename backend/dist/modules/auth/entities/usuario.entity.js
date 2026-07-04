@@ -52,7 +52,7 @@ __decorate([
     __metadata("design:type", String)
 ], Usuario.prototype, "rol", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)({ name: 'ultimo_acceso', nullable: true }),
     __metadata("design:type", Date)
 ], Usuario.prototype, "ultimoAcceso", void 0);
 __decorate([

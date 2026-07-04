@@ -4,24 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Gestión de Productos</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" href="/src/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/src/assets/css/styles.css">
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
-    <!-- Login Page -->
     <div id="app">
         <!-- El contenido se carga dinámicamente -->
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <p>Cargando aplicación...</p>
+        </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="assets/js/services/api.service.js"></script>
-    <script src="assets/js/services/auth.service.js"></script>
-    <script src="assets/js/auth/login.js"></script>
-    <script src="assets/js/auth/register.js"></script>
-    <script src="assets/js/productos/productos.js"></script>
-    <script src="assets/js/categorias/categorias.js"></script>
-    <script src="assets/js/ventas/ventas.js"></script>
-    <script src="assets/js/utils/helpers.js"></script>
-    <script src="assets/js/utils/validators.js"></script>
-    <script src="assets/js/app.js"></script>
+    <!-- Scripts base -->
+    <script src="/src/assets/js/utils/helpers.js"></script>
+    <script src="/src/assets/js/utils/validators.js"></script>
+    <script src="/src/assets/js/services/api.service.js"></script>
+    <script src="/src/assets/js/services/auth.service.js"></script>
+    <script src="/src/assets/js/services/sync.service.js"></script>
+    <script src="/src/assets/js/productos/productos.js"></script>
+    <script src="/src/assets/js/categorias/categorias.js"></script>
+    <script src="/src/assets/js/ventas/ventas.js"></script>
+    <script src="/src/assets/js/app.js"></script>
 </body>
 </html>
