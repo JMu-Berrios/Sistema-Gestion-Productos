@@ -1,27 +1,24 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@nestjs/core");
 const common_1 = require("@nestjs/common");
 const path_1 = require("path");
 const app_module_1 = require("./app.module");
-const cors_1 = __importDefault(require("cors"));
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
-    app.use((0, cors_1.default)({
-        origin: '*',
+    app.enableCors({
+        origin: process.env.ORIGEN_CORS || '*',
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        allowedHeaders: 'Content-Type, Authorization',
-    }));
+        credentials: true,
+        allowedHeaders: 'Content-Type, Authorization, X-Requested-With',
+    });
     app.useGlobalPipes(new common_1.ValidationPipe({
         whitelist: true,
         forbidNonWhitelisted: true,
         transform: true,
     }));
-    const frontendPath = (0, path_1.join)(__dirname, '..', '..', 'fronted', 'src');
-    const publicPath = (0, path_1.join)(__dirname, '..', '..', 'fronted', 'public');
+    const frontendPath = (0, path_1.join)(__dirname, '..', '..', 'frontend', 'src');
+    const publicPath = (0, path_1.join)(__dirname, '..', '..', 'frontend', 'public');
     app.useStaticAssets(publicPath);
     app.useStaticAssets(frontendPath, {
         prefix: '/src',
@@ -30,7 +27,7 @@ async function bootstrap() {
     expressApp.get('/', (req, res) => {
         res.sendFile((0, path_1.join)(frontendPath, 'index.html'));
     });
-    app.setGlobalPrefix('api-tienda');
+    app.setGlobalPrefix('api/v1');
     const port = process.env.PORT || 3000;
     await app.listen(port);
     console.log(`Aplicación ejecutándose en mi servidor: http://localhost:${port}`);

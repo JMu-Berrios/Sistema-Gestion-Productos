@@ -1,19 +1,27 @@
+
+
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
-import cors from 'cors';
+//import cors from 'cors';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   // Configurar CORS
-  app.use(cors({
+  /* app.use(cors({
     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization',
-  }));
+  })); */
+  app.enableCors({
+  origin: process.env.ORIGEN_CORS || '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  allowedHeaders: 'Content-Type, Authorization, X-Requested-With',
+});
 
   // Configurar validación global
   app.useGlobalPipes(new ValidationPipe({
@@ -23,8 +31,8 @@ async function bootstrap() {
   }));
 
   // Servir archivos estáticos del frontend
-  const frontendPath = join(__dirname, '..', '..', 'fronted', 'src');
-  const publicPath = join(__dirname, '..', '..', 'fronted', 'public');
+  const frontendPath = join(__dirname, '..', '..', 'frontend', 'src');
+  const publicPath = join(__dirname, '..', '..', 'frontend', 'public');
 
   app.useStaticAssets(publicPath);
   app.useStaticAssets(frontendPath, {
@@ -37,7 +45,7 @@ async function bootstrap() {
   });
 
   // Configurar prefijo global de API
-  app.setGlobalPrefix('api-tienda');
+  app.setGlobalPrefix('api/v1');
 
   const port = process.env.PORT || 3000;
   await app.listen(port);
