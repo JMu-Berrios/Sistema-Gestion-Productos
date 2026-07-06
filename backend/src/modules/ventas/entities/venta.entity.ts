@@ -7,13 +7,13 @@ export class Venta {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 20 })
+  @Column({ name: 'numero_factura', length: 20 })
   numeroFactura: string;
 
   @Column('decimal', { precision: 10, scale: 2 })
   total: number;
 
-  @Column()
+  @Column({ name: 'usuario_id' })
   usuarioId: number;
 
   @ManyToOne(() => Usuario)

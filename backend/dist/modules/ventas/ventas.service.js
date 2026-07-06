@@ -45,7 +45,21 @@ let VentasService = class VentasService {
         const result = await this.dataSource.query(`CALL crear_venta(?, ?, @venta_id)`, [usuarioId, productosJson]);
         const [ventaIdResult] = await this.dataSource.query(`SELECT @venta_id as venta_id`);
         const ventaId = ventaIdResult.venta_id;
-        return this.buscarPorId(ventaId);
+        const venta = await this.ventaRepository.findOne({
+            where: { id: ventaId },
+            relations: {
+                usuario: true,
+                detalles: {
+                    producto: {
+                        categoria: true,
+                    },
+                },
+            },
+        });
+        if (!venta) {
+            throw new common_1.NotFoundException('Venta no encontrada después de crearla');
+        }
+        return venta;
     }
     async listarTodos() {
         return this.ventaRepository.find({

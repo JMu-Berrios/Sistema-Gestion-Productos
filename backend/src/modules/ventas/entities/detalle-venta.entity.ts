@@ -7,19 +7,19 @@ export class DetalleVenta {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ name: 'venta_id' })
   ventaId: number;
 
-  @Column()
+  @Column({ name: 'producto_id' })
   productoId: number;
 
   @Column('int')
   cantidad: number;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column('decimal', { precision: 10, scale: 2, name: 'precio_unitario' })
   precioUnitario: number;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column('decimal', { precision: 10, scale: 2, name: 'subtotal' })
   subtotal: number;
 
   @ManyToOne(() => Venta, venta => venta.detalles)

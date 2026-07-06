@@ -55,7 +55,23 @@ export class VentasService {
     const ventaId = ventaIdResult.venta_id;
 
     // Obtener la venta completa con sus detalles
-    return this.buscarPorId(ventaId);
+    const venta = await this.ventaRepository.findOne({
+      where: { id: ventaId },
+      relations: {
+        usuario: true,
+        detalles: {
+          producto: {
+            categoria: true,
+          },
+        },
+      },
+    });
+
+    if (!venta) {
+      throw new NotFoundException('Venta no encontrada después de crearla');
+    }
+
+    return venta;
   }
 
   async listarTodos(): Promise<Venta[]> {

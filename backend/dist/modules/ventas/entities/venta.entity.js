@@ -21,7 +21,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Venta.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ length: 20 }),
+    (0, typeorm_1.Column)({ name: 'numero_factura', length: 20 }),
     __metadata("design:type", String)
 ], Venta.prototype, "numeroFactura", void 0);
 __decorate([
@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Venta.prototype, "total", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ name: 'usuario_id' }),
     __metadata("design:type", Number)
 ], Venta.prototype, "usuarioId", void 0);
 __decorate([

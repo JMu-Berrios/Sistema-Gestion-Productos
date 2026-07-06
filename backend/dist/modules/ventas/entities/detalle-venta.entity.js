@@ -21,11 +21,11 @@ __decorate([
     __metadata("design:type", Number)
 ], DetalleVenta.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ name: 'venta_id' }),
     __metadata("design:type", Number)
 ], DetalleVenta.prototype, "ventaId", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ name: 'producto_id' }),
     __metadata("design:type", Number)
 ], DetalleVenta.prototype, "productoId", void 0);
 __decorate([
@@ -33,11 +33,11 @@ __decorate([
     __metadata("design:type", Number)
 ], DetalleVenta.prototype, "cantidad", void 0);
 __decorate([
-    (0, typeorm_1.Column)('decimal', { precision: 10, scale: 2 }),
+    (0, typeorm_1.Column)('decimal', { precision: 10, scale: 2, name: 'precio_unitario' }),
     __metadata("design:type", Number)
 ], DetalleVenta.prototype, "precioUnitario", void 0);
 __decorate([
-    (0, typeorm_1.Column)('decimal', { precision: 10, scale: 2 }),
+    (0, typeorm_1.Column)('decimal', { precision: 10, scale: 2, name: 'subtotal' }),
     __metadata("design:type", Number)
 ], DetalleVenta.prototype, "subtotal", void 0);
 __decorate([
