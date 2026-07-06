@@ -13,8 +13,6 @@ class App {
         this.init();
     }
 
-    mysql://root:XkDWojxODAkRSlNGELPMWKCgdQxJQxpM@turntable.proxy.rlwy.net:36311/railway
-
     async init() {
         console.log(' Iniciando aplicación...');
         

@@ -25,7 +25,7 @@ async function bootstrap() {
     });
     const expressApp = app.getHttpAdapter().getInstance();
     expressApp.get('/', (req, res) => {
-        res.sendFile((0, path_1.join)(frontendPath, 'index.html'));
+        res.sendFile((0, path_1.join)(frontendPath, 'pages/auth/login.html'));
     });
     app.setGlobalPrefix('api/v1');
     const port = process.env.PORT || 3000;
