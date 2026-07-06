@@ -42,7 +42,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Venta.prototype, "detalles", void 0);
 __decorate([
-    (0, typeorm_1.CreateDateColumn)(),
+    (0, typeorm_1.CreateDateColumn)({ name: 'fecha_creacion' }),
     __metadata("design:type", Date)
 ], Venta.prototype, "fechaCreacion", void 0);
 exports.Venta = Venta = __decorate([

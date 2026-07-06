@@ -33,10 +33,10 @@ export class Usuario {
   @Column({ name: 'ultimo_acceso', nullable: true })
   ultimoAcceso: Date;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'fecha_actualizacion' })
   fechaActualizacion: Date;
 
   // Relación con ventas

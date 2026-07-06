@@ -56,11 +56,11 @@ __decorate([
     __metadata("design:type", Date)
 ], Usuario.prototype, "ultimoAcceso", void 0);
 __decorate([
-    (0, typeorm_1.CreateDateColumn)(),
+    (0, typeorm_1.CreateDateColumn)({ name: 'fecha_creacion' }),
     __metadata("design:type", Date)
 ], Usuario.prototype, "fechaCreacion", void 0);
 __decorate([
-    (0, typeorm_1.UpdateDateColumn)(),
+    (0, typeorm_1.UpdateDateColumn)({ name: 'fecha_actualizacion' }),
     __metadata("design:type", Date)
 ], Usuario.prototype, "fechaActualizacion", void 0);
 __decorate([

@@ -5,8 +5,8 @@ class ApiService {
                            !window.location.hostname.includes('127.0.0.1');
         
         this.baseURL = isProduction 
-            ? 'https://sistema-gestion.onrender.com/api'
-            : 'http://localhost:3000/api';
+            ? 'https://sistema-gestion.onrender.com/api-tienda'
+            : 'http://localhost:3000/api-tienda';
             
         this.token = localStorage.getItem('token');
         this.offlineMode = false;

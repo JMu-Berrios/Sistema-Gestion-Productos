@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@nestjs/core");
 const common_1 = require("@nestjs/common");
+const path_1 = require("path");
 const app_module_1 = require("./app.module");
 const cors_1 = __importDefault(require("cors"));
 async function bootstrap() {
@@ -19,6 +20,16 @@ async function bootstrap() {
         forbidNonWhitelisted: true,
         transform: true,
     }));
+    const frontendPath = (0, path_1.join)(__dirname, '..', '..', 'fronted', 'src');
+    const publicPath = (0, path_1.join)(__dirname, '..', '..', 'fronted', 'public');
+    app.useStaticAssets(publicPath);
+    app.useStaticAssets(frontendPath, {
+        prefix: '/src',
+    });
+    const expressApp = app.getHttpAdapter().getInstance();
+    expressApp.get('/', (req, res) => {
+        res.sendFile((0, path_1.join)(frontendPath, 'index.html'));
+    });
     app.setGlobalPrefix('api-tienda');
     const port = process.env.PORT || 3000;
     await app.listen(port);

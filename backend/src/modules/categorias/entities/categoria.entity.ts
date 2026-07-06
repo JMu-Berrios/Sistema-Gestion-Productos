@@ -20,9 +20,9 @@ export class Categoria {
   @OneToMany(() => Producto, producto => producto.categoria)
   productos: Producto[];
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'fecha_actualizacion' })
   fechaActualizacion: Date;
 }

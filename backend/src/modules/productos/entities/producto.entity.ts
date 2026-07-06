@@ -31,9 +31,9 @@ export class Producto {
   @Column({ default: true })
   activo: boolean;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'fecha_actualizacion' })
   fechaActualizacion: Date;
 }

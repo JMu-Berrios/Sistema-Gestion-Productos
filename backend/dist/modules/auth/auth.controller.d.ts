@@ -12,4 +12,7 @@ export declare class AuthController {
         token: string;
         usuario: any;
     }>;
+    health(): {
+        status: string;
+    };
 }

@@ -23,6 +23,6 @@ export class Venta {
   @OneToMany(() => DetalleVenta, detalle => detalle.venta)
   detalles: DetalleVenta[];
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
 }

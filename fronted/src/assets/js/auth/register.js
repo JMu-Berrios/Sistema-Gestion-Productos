@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Verificar si ya está autenticado
     if (authService.isAuthenticated()) {
-        window.location.href = '/pages/dashboard/index.html';
+        window.location.href = '/';
         return;
     }
 
@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 successMessage.textContent = '¡Inicio de sesión exitoso! Redirigiendo...';
                 successMessage.style.display = 'block';
                 
-                // Redirigir al dashboard después de 1 segundo
+                // Redirigir al dashboard (SPA) después de 1 segundo
                 setTimeout(() => {
-                    window.location.href = '/pages/dashboard/index.html';
+                    window.location.href = '/';
                 }, 1000);
                 
             } catch (error) {
