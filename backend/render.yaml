@@ -2,7 +2,7 @@ services:
   - type: web
     name: sistema-gestion-backend
     env: node
-    buildCommand: npm install
+    buildCommand: npm install && npm run build
     startCommand: npm run start:prod
     envVars:
       - key: DB_HOST
