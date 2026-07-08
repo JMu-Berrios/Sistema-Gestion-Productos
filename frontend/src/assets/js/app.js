@@ -21,15 +21,17 @@ class App {
         
         // Verificar autenticación
         const isAuthenticated = authService.isAuthenticated();
+        console.log('🔑 Autenticado:', isAuthenticated);
         
         // Determinar página actual
         const path = window.location.pathname;
         const page = this.getPageFromPath(path);
+        console.log('📍 Ruta actual:', path);
         
         // Si no está autenticado y no está en login/register, redirigir
         if (!isAuthenticated && !['login', 'register'].includes(page)) {
             this.navigateTo('login');
-            return;
+            return; 
         }
         
         // Si está autenticado y está en login/register, redirigir al dashboard
@@ -78,13 +80,14 @@ class App {
         });
     }
 
+    //se agrega prefijos a la ruta de los htmls para mostrar la interfaz
     getPageFromPath(path) {
-        if (path.includes('/pages/auth/login')) return 'login';
-        if (path.includes('/pages/auth/register')) return 'register';
-        if (path.includes('/pages/dashboard')) return 'dashboard';
-        if (path.includes('/pages/productos')) return 'productos';
-        if (path.includes('/pages/categorias')) return 'categorias';
-        if (path.includes('/pages/ventas')) return 'ventas';
+        if (path.includes('/src/pages/auth/login')) return 'login';
+        if (path.includes('/src/pages/auth/register')) return 'register';
+        if (path.includes('/src/pages/dashboard')) return 'dashboard';
+        if (path.includes('/src/pages/productos')) return 'productos';
+        if (path.includes('/src/pages/categorias')) return 'categorias';
+        if (path.includes('/src/pages/ventas')) return 'ventas';
         return 'dashboard';
     }
 
@@ -398,15 +401,16 @@ class App {
         `;
     }
 
+    //se agrega prefijo src para mostrar infterfaz al ser llamadas
     navigateTo(page) {
         // Cambiar la URL sin recargar
         const pages = {
-            'login': '/pages/auth/login.html',
-            'register': '/pages/auth/register.html',
-            'dashboard': '/pages/dashboard/index.html',
-            'productos': '/pages/productos/listar.html',
-            'categorias': '/pages/categorias/listar.html',
-            'ventas': '/pages/ventas/listar.html'
+            'login': '/src/pages/auth/login.html',
+            'register': '/src/pages/auth/register.html',
+            'dashboard': '/src/pages/dashboard/index.html',
+            'productos': '/src/pages/productos/listar.html',
+            'categorias': '/src/pages/categorias/listar.html',
+            'ventas': '/src/pages/ventas/listar.html'
         };
         
         const url = pages[page] || pages['dashboard'];

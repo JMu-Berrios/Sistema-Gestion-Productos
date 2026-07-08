@@ -33,6 +33,7 @@ async function bootstrap() {
   // Servir archivos estáticos del frontend
   const frontendPath = join(__dirname, '..', '..', 'frontend', 'src');
   const publicPath = join(__dirname, '..', '..', 'frontend', 'public');
+  console.log('📁 Frontend path:', frontendPath);
 
   app.useStaticAssets(publicPath);
   app.useStaticAssets(frontendPath, {

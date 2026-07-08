@@ -19,13 +19,14 @@ async function bootstrap() {
     }));
     const frontendPath = (0, path_1.join)(__dirname, '..', '..', 'frontend', 'src');
     const publicPath = (0, path_1.join)(__dirname, '..', '..', 'frontend', 'public');
+    console.log('📁 Frontend path:', frontendPath);
     app.useStaticAssets(publicPath);
     app.useStaticAssets(frontendPath, {
         prefix: '/src',
     });
     const expressApp = app.getHttpAdapter().getInstance();
     expressApp.get('/', (req, res) => {
-        res.sendFile((0, path_1.join)(frontendPath, 'pages/auth/login.html'));
+        res.sendFile((0, path_1.join)(frontendPath, 'index.html'));
     });
     app.setGlobalPrefix('api/v1');
     const port = process.env.PORT || 3000;
