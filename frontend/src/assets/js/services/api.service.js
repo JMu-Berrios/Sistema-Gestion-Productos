@@ -45,8 +45,9 @@ class ApiService {
       if (response.status === 401) {
         localStorage.removeItem("token");
         localStorage.removeItem("usuario");
-        window.location.href = "/pages/auth/login.html";
-        throw new Error("Sesión expirada");
+        // En lugar de apuntar a /src/pages/auth/login.html, apunta a la raíz
+        window.location.href = "/";
+        throw new Error("Sesión expirada o credenciales incorrectas");
       }
 
       const responseData = await response.json();
