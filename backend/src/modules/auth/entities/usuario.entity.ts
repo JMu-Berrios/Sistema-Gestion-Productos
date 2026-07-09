@@ -21,12 +21,6 @@ export class Usuario {
   @Column({ default: true })
   activo: boolean;
 
-  @Column({ nullable: true, length: 20 })
-  telefono: string;
-
-  @Column({ nullable: true, length: 255 })
-  direccion: string;
-
   @Column({ nullable: true, length: 50 })
   rol: string;
 

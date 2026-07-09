@@ -40,8 +40,6 @@ export class AuthService {
       apellido: registerDto.apellido,
       email: registerDto.email,
       password: passwordHash,
-      telefono: registerDto.telefono || null,
-      direccion: registerDto.direccion || null,
       rol: 'usuario', // Rol por defecto
       activo: true,
     });
@@ -62,8 +60,6 @@ export class AuthService {
         nombre: nuevoUsuario.nombre,
         apellido: nuevoUsuario.apellido,
         email: nuevoUsuario.email,
-        telefono: nuevoUsuario.telefono,
-        direccion: nuevoUsuario.direccion,
         rol: nuevoUsuario.rol,
       },
     };
@@ -110,8 +106,6 @@ export class AuthService {
         nombre: usuario.nombre,
         apellido: usuario.apellido,
         email: usuario.email,
-        telefono: usuario.telefono,
-        direccion: usuario.direccion,
         rol: usuario.rol,
       },
     };

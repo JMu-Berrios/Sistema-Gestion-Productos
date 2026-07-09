@@ -5,17 +5,10 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
-//import cors from 'cors';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  // Configurar CORS
-  /* app.use(cors({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type, Authorization',
-  })); */
   app.enableCors({
   origin: process.env.ORIGEN_CORS || '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -33,7 +26,7 @@ async function bootstrap() {
   // Servir archivos estáticos del frontend
   const frontendPath = join(__dirname, '..', '..', 'frontend', 'src');
   const publicPath = join(__dirname, '..', '..', 'frontend', 'public');
-  console.log('📁 Frontend path:', frontendPath);
+  console.log('Frontend path:', frontendPath);
 
   app.useStaticAssets(publicPath);
   app.useStaticAssets(frontendPath, {
